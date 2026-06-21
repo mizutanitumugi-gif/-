@@ -130,6 +130,9 @@ async function createOnlineRoom(){
     await db.collection("rooms").doc(roomId).set({
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      expireAt: firebase.firestore.Timestamp.fromDate(
+  new Date(Date.now() + 24 * 60 * 60 * 1000)
+),
       status: "waiting",
       players: { player: ONLINE.uid, cpu: null },
       playerNames: { player: playerName, cpu: "" },
